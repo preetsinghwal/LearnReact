@@ -1,35 +1,31 @@
 import './components/video.css';
 import Video from './components/video';
-import './App.css'
+import './App.css';
+import vidoesList from './data/data';
+import PlayButton from './components/playButton';
 
 function App() {
-  let cardObj = {
-    title : "Learn React Js",
-    channelName : "PS Studio",
-    views : "1k",
-    year : '! year ago'
-  }
+  
   return (
     <div className='App'>
-      <Video {...cardObj}></Video>
-      <Video 
-       title= "Chapter 1"
-       channelName = "PS Studio"
-       views = "2k"
-       year = "1year ago"
-      ></Video>
-      <Video 
-       title= "Chapter 2"
-       channelName = "PS Studio"
-       views = "3k"
-       year = "1 year ago"
-      ></Video>
-      <Video 
-       title= "Chapter 3"
-       channelName = "PS Studio"
-       views = "3k"
-       year = "1year ago"
-      ></Video>
+      <div className='videoListContainer' onClick={() => console.log('from parent')}>
+      {
+        vidoesList.map((video,key) => {
+          return(
+            <Video 
+            key={key}
+            title= {video.title}
+            channelName = {video.channelName}
+            views = {video.views}
+            year = {video.year}
+            verified = {video.verified}
+          >
+            <PlayButton onPlay = {() => console.log('play', video.title)} onPause = {() => console.log('Pause', video.title)}>{video.title}</PlayButton>
+          </Video>
+          )
+        })
+      }
+      </div>
     </div>
   );
 }
